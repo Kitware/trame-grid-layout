@@ -56,260 +56,56 @@ To update the client code, run the following command line while updating the tar
     mkdir -p ./trame_grid_layout/module/serve
     curl https://unpkg.com/vue-grid-layout@2.4.0 -Lo ./trame_grid_layout/module/serve/vue-grid-layout.js
 
-
-Trame widgets
+Simple example
 -----------------------------------------------------------
-
-VtkRemoteView
------------------------------------------------------------
-
-The VtkRemoteView component relies on the server for rendering by sending images to the client by simply binding your vtkRenderWindow to it.
-This component gives you controls to the image size reduction and quality to reduce latency while interacting.
-
-
-How to use it?
-```````````````````````````````````````````````````````````
-
-The component allows you to directly tap into a vtk.js interactor's events so you can bind your own method from Python to them.
-The list of available events can be found `here <https://github.com/Kitware/vtk-js/blob/b92ad5463150b88514fcb5020c1fa6c7fcfe2a4f/Sources/Rendering/Core/RenderWindowInteractor/index.js#L23-L60>`_.
-
-The component also provides a convenient method for pushing a new image to the client when you're modifying your scene on the Python side.
 
 .. code-block:: python
 
-    from trame.widgets import vtk
+    from trame.app import get_server
+    from trame.ui.vuetify import SinglePageLayout
+    from trame.widgets import vuetify, grid
 
-    def end():
-        pass
+    server = get_server()
+    state = server.state
 
-    remote_view = vtk.vtkRemoteView(
-        view=...,               # Instance of vtkRenderWindow (required)
-        ref=...,                # Identifier for this component
-        interactive_quality=60, # [0, 100] 0 for fastest render, 100 for best quality
-        interactive_ratio=...,  # [0.1, 1] Image size scale factor while interacting
-        interactor_events=(     # Enable vtk.js interactor events for method binding
-            "events",
-            ["EndAnimation"],
-        ),
-        EndAnimation=end,       # Bind method to the enabled event
-    )
-
-    remote_view.update()  # Force image to be pushed to client
-
-
-Examples
-```````````````````````````````````````````````````````````
-
-- `VTK/SimpleCone/RemoteRendering <https://github.com/Kitware/trame/blob/master/examples/VTK/SimpleCone/RemoteRendering.py>`_
-- `VTK/ContourGeometry/RemoteRendering <https://github.com/Kitware/trame/blob/master/examples/VTK/ContourGeometry/RemoteRendering.py>`_
-- `VTK/Applications/ZarrContourViewer <https://github.com/Kitware/trame/blob/master/examples/VTK/Applications/ZarrContourViewer/app.py>`_
-
-
-VtkLocalView
------------------------------------------------------------
-
-The VtkLocalView component relies on the server for defining the vtkRenderWindow but then only the geometry is exchanged with the client.
-The server does not need a GPU as no rendering is happening on the server.
-The vtkRenderWindow is only used to retrieve the scene data and parameters (coloring by, representations, ...).
-By relying on the same vtkRenderWindow, you can easily switch from a `VtkRemoteView` to a `VtkLocalView` or vice-versa.
-This component gives you controls on how you want to map mouse interaction with the camera.
-The default setting mimic default VTK interactor style so you will rarely have to override to the `interactor_settings`.
-
-How to use it?
-```````````````````````````````````````````````````````````
-
-The component allows you to directly tap into a vtk.js interactor events so you can bind your own method from python to them.
-The list of available events can be found `here <https://github.com/Kitware/vtk-js/blob/b92ad5463150b88514fcb5020c1fa6c7fcfe2a4f/Sources/Rendering/Core/RenderWindowInteractor/index.js#L23-L60>`_.
-
-The component also provides a convenient method to push the scene to the client when you're modifying your scene on the python side.
-
-.. code-block:: python
-
-    from trame.widgets import vtk
-
-    def end():
-        pass
-
-    local_view = vtk.VtkLocalView(
-        view=...,                # Instance of vtkRenderWindow (required)
-        ref=...,                 # Identifier for this component
-        context_name=...,        # Namespace for geometry cache
-        interactor_settings=..., # Options for camera controls. See below.
-        interactor_events=(      # Enable vtk.js interactor events for method binding
-            "events",
-            ['EndAnimation'],
-        ),
-        EndAnimation=end,        # Bind method to the enabled event
-    )
-
-    local_view.update()  # Force geometry to be pushed
-
-
-
-Interactor Settings
-```````````````````````````````````````````````````````````
-
-For the `interactor_settings` we expect a list of mouse event type linked to an action. The example below is what is used as default:
-
-.. code-block:: javascript
-
-    interactor_settings=[
-      {
-        button: 1,
-        action: 'Rotate',
-      }, {
-        button: 2,
-        action: 'Pan',
-      }, {
-        button: 3,
-        action: 'Zoom',
-        scrollEnabled: true,
-      }, {
-        button: 1,
-        action: 'Pan',
-        shift: true,
-      }, {
-        button: 1,
-        action: 'Zoom',
-        alt: true,
-      }, {
-        button: 1,
-        action: 'ZoomToMouse',
-        control: true,
-      }, {
-        button: 1,
-        action: 'Roll',
-        alt: true,
-        shift: true,
-      }
+    LAYOUT = [
+        {"x": 0, "y": 0, "w": 2, "h": 2, "i": "0"},
+        {"x": 2, "y": 0, "w": 2, "h": 4, "i": "1"},
+        {"x": 4, "y": 0, "w": 2, "h": 5, "i": "2"},
+        {"x": 6, "y": 0, "w": 2, "h": 3, "i": "3"},
+        {"x": 8, "y": 0, "w": 2, "h": 3, "i": "4"},
+        {"x": 10, "y": 0, "w": 2, "h": 3, "i": "5"},
+        {"x": 0, "y": 5, "w": 2, "h": 5, "i": "6"},
+        {"x": 2, "y": 5, "w": 2, "h": 5, "i": "7"},
+        {"x": 4, "y": 5, "w": 2, "h": 5, "i": "8"},
+        {"x": 6, "y": 3, "w": 2, "h": 4, "i": "9"},
+        {"x": 8, "y": 4, "w": 2, "h": 4, "i": "10"},
+        {"x": 10, "y": 4, "w": 2, "h": 4, "i": "11"},
+        {"x": 0, "y": 10, "w": 2, "h": 5, "i": "12"},
+        {"x": 2, "y": 10, "w": 2, "h": 5, "i": "13"},
+        {"x": 4, "y": 8, "w": 2, "h": 4, "i": "14"},
+        {"x": 6, "y": 8, "w": 2, "h": 4, "i": "15"},
+        {"x": 8, "y": 10, "w": 2, "h": 5, "i": "16"},
+        {"x": 10, "y": 4, "w": 2, "h": 2, "i": "17"},
+        {"x": 0, "y": 9, "w": 2, "h": 3, "i": "18"},
+        {"x": 2, "y": 6, "w": 2, "h": 2, "i": "19"},
     ]
 
-A mouse event can be identified with the following set of properties:
+    with SinglePageLayout(server) as layout:
+        layout.title.set_text("Grid layout")
+        with layout.content:
+            with grid.GridLayout(
+                layout=("layout", LAYOUT),
+                row_height=20,
+            ):
+                grid.GridItem(
+                    "{{ item.i }}",
+                    v_for="item in layout",
+                    key="item.i",
+                    v_bind="item",
+                    classes="pa-4",
+                    style="border: solid 1px #333; background: rgba(128, 128, 128, 0.5);",
+                )
 
-.. list-table::
-   :widths: 20 20 60
-   :header-rows: 1
-
-   * - Attribute
-     - Value
-     - Description
-   * - button
-     - 1, 2, 3
-     - Which button should be down
-   * - shift
-     - true/false
-     - Is the Shift key down
-   * - alt
-     - true/false
-     - Is the Alt key down
-   * - control
-     - true/false
-     - Is the Ctrl key down
-   * - scrollEnabled
-     - true/false
-     - Some action could also be triggered by scroll
-   * - dragEnabled
-     - true/false
-     - Mostly used to disable default drag behavior
-
-And the action could be one of the following:
-
-.. list-table::
-   :widths: 25 75
-   :header-rows: 1
-
-   * - Action
-     - Description
-   * - Pan
-     - Will pan the object on the plane normal to the camera
-   * - Zoom
-     - Will zoom closer or further from the object based on the drag direction
-   * - Roll
-     - Will rotate the object around the view direction
-   * - ZoomToMouse
-     - Will zoom while keeping the location that was initially under the mouse at the same spot
-
-
-Examples
-```````````````````````````````````````````````````````````
-
-- `VTK/SimpleCone/LocalRendering <https://github.com/Kitware/trame/blob/master/examples/VTK/SimpleCone/LocalRendering.py>`_
-- `VTK/ContourGeometry/LocalRendering <https://github.com/Kitware/trame/blob/master/examples/VTK/ContourGeometry/LocalRendering.py>`_
-- `Tutorial/VTK/CarotidFlow <https://github.com/Kitware/trame/blob/master/examples/Tutorial/VTK/CarotidFlow.py>`_
-
-
-VtkRemoteLocalView
------------------------------------------------------------
-
-The VtkRemoteLocalView component is a blend of `VtkLocalView` and `VtkRemoteView` where the user can choose dynamically which mode they want to be in.
-When instantiating a `VtkRemoteLocalView` several variables and triggers will be created for you to more easily control your view.
-
-How to use it?
-```````````````````````````````````````````````````````````
-
-.. code-block:: python
-
-    from trame.html import vtk
-
-    rl_view = vtk.VtkRemoteLocalView(
-        view=...,                # Instance of vtkRenderWindow (required)
-
-        # Just VtkRemoteLocalView params
-        namespace=...,           # Prefix for variables and triggers. See below. (required)
-        mode="local",            # Decide between local or remote. See below.
-
-        # VtkRemoteView params
-        **remote_view_params,
-
-        # VtkLocalView params
-        **local_view_params,
-    )
-
-    rl_view.update_geometry()  # Force update to geometry
-    rl_view.update_image()     # Force update to image
-    rl_view.view()             # Get linked vtkRenderWindow instance
-
-
-Namespace parameter
-```````````````````````````````````````````````````````````
-
-Constructing a VtkRemoteLocalView will set several variables, prefixed by a namespace. In the example below we used `namespace="view"`.
-
-.. list-table::
-   :widths: 25 75
-   :header-rows: 1
-
-   * - Variable
-     - Description
-   * - viewId
-     - `str` representing the vtkRenderWindow id
-   * - viewMode
-     - `local`or `remote` to control which View is displayed to the user
-
-Constructing a VtkRemoteLocalView will also set several trame triggers.
-
-.. list-table::
-   :widths: 25 75
-   :header-rows: 1
-
-   * - Trigger
-     - Description
-   * - viewCamera
-     - When call with no arguments, the server will push its camera to the client
-   * - viewAnimateStart
-     - Start the animation loop for constantly rendering
-   * - viewAnimateStop
-     - Stop the animation loop
-
-The `namespace` will also be used as `ref=` unless provided by the user.
-
-Mode parameter
-```````````````````````````````````````````````````````````
-
-The mode is driven by the variable `{namespace}Mode` but can be provided when instantiated so the default can be overridden and a JavaScript expression can be used instead of the default variable. This attribute behaves the same way as any trame one except, we won't register the left side as a state entry since we already have one under `{namespace}Mode`. This means we will evaluate the left side of the expression assuming a tuple is provided and the right side of the tuple is used to set its initial value.
-
-Examples
-```````````````````````````````````````````````````````````
-
-- `API <https://trame.readthedocs.io/en/latest/trame.html.vtk.html>`_
-- `VTK/ContourGeometry/DynamicLocalRemoteRendering <https://github.com/Kitware/trame/blob/f6594a02ed7e1ecc24058ffac527e010e8181e22/examples/VTK/ContourGeometry/DynamicLocalRemoteRendering.py>`_
+    if __name__ == "__main__":
+        server.start()
