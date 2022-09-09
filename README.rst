@@ -1,12 +1,6 @@
 Grid Layout widgets for trame
 ==================================
 
-Trame wrapper to vue-grid-layout
-
-
-* Free software: MIT License
-
-
 trame-grid-layout extend trame **widgets** with components that can be used to create some dynamic grid layout containers.
 It leverage [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout) which is a grid layout system, like 
 [Gridster](http://dsmorse.github.io/gridster.js/), for Vue.js. Heavily inspired by [React-Grid-Layout](https://github.com/react-grid-layout/react-grid-layout).
