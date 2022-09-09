@@ -1,2 +1,2 @@
 [codespell]
-skip = **/package-lock.json
+skip = trame_grid/module/serve/**

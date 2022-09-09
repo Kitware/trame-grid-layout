@@ -30,17 +30,17 @@ class GridLayout(HtmlElement):
         :param prevent_collision: (default: False) Says if grid items will move when being dragged over.
         :param use_css_transforms: (default: True) Says if the CSS transition-property: transform; should be used.
         :param responsive: (default: False) Says if the layout should be responsive to window width. See also responsiveLayouts, breakpoints and cols.
-        :param breakpoints: (default: "{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }")  Breakpoints defined for responsive layout, the parameter represents the width of different devices:lg(large), md(medium), sm(small), xs(extra small). Sets widths on wich column number changes. See also responsiveLayouts and cols.
+        :param breakpoints: (default: "{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }")  Breakpoints defined for responsive layout, the parameter represents the width of different devices:lg(large), md(medium), sm(small), xs(extra small). Sets widths on which column number changes. See also responsiveLayouts and cols.
         :param cols: (default: "{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }") Defines number of columns for each breakpoint
         :param use_style_cursor: (default: True) Says if set the styleCursor option to true. When dragging freezes, setting this value to false may alleviate problems. This property is not reactive.
         :param transform_scale: (default: 1) Sets a scaling factor to the size of the grid items, 1 is 100%
 
         Events
 
-        :param layout_created: Emited on the component created lifecycle hook
-        :param layout_before_mount: Emited on the component beforeMount lifecycle hook
-        :param layout_mounted: Emited on the component mounted lifecycle hook
-        :param layout_ready: Emited when all the operations on the mount hook finish
+        :param layout_created: Emitted on the component created lifecycle hook
+        :param layout_before_mount: Emitted on the component beforeMount lifecycle hook
+        :param layout_mounted: Emitted on the component mounted lifecycle hook
+        :param layout_ready: Emitted when all the operations on the mount hook finish
         :param layout_updated: Every time the layout has finished updating and positions of all grid-items are recalculated
         :param breakpoint_changed: Every time the breakpoint value changes due to window resize
 
