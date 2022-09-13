@@ -1,5 +1,5 @@
 from trame_client.widgets.core import AbstractElement
-from .. import module
+from .. import module, update_layout
 
 
 class HtmlElement(AbstractElement):
@@ -10,7 +10,7 @@ class HtmlElement(AbstractElement):
 
 
 class GridLayout(HtmlElement):
-    def __init__(self, children=None, **kwargs):
+    def __init__(self, children=None, layout_updated=None, **kwargs):
         """
         `GridLayout <https://jbaysolutions.github.io/vue-grid-layout/guide/properties.html#gridlayout>`_
 
@@ -45,9 +45,13 @@ class GridLayout(HtmlElement):
         :param breakpoint_changed: Every time the breakpoint value changes due to window resize
 
         """
+        if layout_updated is None:
+            layout_updated = (self.update, "[$event]")
+
         super().__init__(
             "grid-layout",
             children,
+            layout_updated=layout_updated,
             **kwargs,
         )
         self._attr_names += [
@@ -81,6 +85,13 @@ class GridLayout(HtmlElement):
             ("layout_updated", "layout-updated"),
             ("breakpoint_changed", "breakpoint-changed"),
         ]
+        self._layout_name = kwargs.get("layout", kwargs.get("layout_sync"))
+        if isinstance(self._layout_name, (tuple, list)):
+            self._layout_name = self._layout_name[0]
+
+    def update(self, new_layout):
+        if self._layout_name:
+            update_layout(self._server.state[self._layout_name], new_layout)
 
 
 class GridItem(HtmlElement):
