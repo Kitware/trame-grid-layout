@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.0 (2022-09-13)
+### Feature
+* **layout:** Add update method on GridLayout ([`cda67a6`](https://github.com/Kitware/trame-grid-layout/commit/cda67a621e6ef9f37ce2c6e06a34594085772536))
+
+### Breaking
+* new API with implicit attribute handling  ([`cda67a6`](https://github.com/Kitware/trame-grid-layout/commit/cda67a621e6ef9f37ce2c6e06a34594085772536))
+
 ## v0.0.2 (2022-09-13)
 ### Fix
 * **attributes:** Force some attributes to always evaluate ([`c19c266`](https://github.com/Kitware/trame-grid-layout/commit/c19c2666837b2977f9340d06789224d3abe83233))
