@@ -51,12 +51,13 @@ class GridLayout(HtmlElement):
             **kwargs,
         )
         self._attr_names += [
-            ("layout"),
+            ("layout", ":layout"),
+            ("layout_sync", ":layout.sync"),
             ("responsive_layouts", "responsiveLayouts"),
-            ("col_num", "colNum"),
-            ("row_height", "rowHeight"),
-            ("max_rows", "maxRows"),
-            ("margin"),
+            ("col_num", ":colNum"),
+            ("row_height", ":rowHeight"),
+            ("max_rows", ":maxRows"),
+            ("margin", ":margin"),
             ("is_draggable", "isDraggable"),
             ("is_resizable", "isResizable"),
             ("is_mirrored", "isMirrored"),

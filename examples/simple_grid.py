@@ -30,6 +30,7 @@ LAYOUT = [
 
 with SinglePageLayout(server) as layout:
     layout.title.set_text("Grid layout")
+    layout.toolbar.height = 32
     with layout.content:
         with grid.GridLayout(
             layout=("layout", LAYOUT),
@@ -41,8 +42,9 @@ with SinglePageLayout(server) as layout:
                 key="item.i",
                 v_bind="item",
                 classes="pa-4",
-                style="border: solid 1px #333; background: rgba(128, 128, 128, 0.5);",
+                style="border: solid 1px #333; background: rgba(128, 128, 128, 0.5); touch-action: none;",
             )
+
 
 if __name__ == "__main__":
     server.start()
