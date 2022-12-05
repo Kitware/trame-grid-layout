@@ -1,4 +1,5 @@
 from trame_client.widgets.core import AbstractElement
+from trame_client.widgets.html import Div
 from .. import module, update_layout
 
 
@@ -48,6 +49,14 @@ class GridLayout(HtmlElement):
         if layout_updated is None:
             layout_updated = (self.update, "[$event]")
 
+        self._layout_name = kwargs.get("layout", kwargs.get("layout_sync"))
+        if isinstance(self._layout_name, (tuple, list)):
+            self._layout_name = self._layout_name[0]
+
+        # Need to re-evaluate the siblings
+        self._dirty_layout_key = f"{self._layout_name}_dirty_ts"
+        Div(f"{{{{{ self._dirty_layout_key }}}}}", style="display: none;")
+
         super().__init__(
             "grid-layout",
             children,
@@ -85,13 +94,15 @@ class GridLayout(HtmlElement):
             ("layout_updated", "layout-updated"),
             ("breakpoint_changed", "breakpoint-changed"),
         ]
-        self._layout_name = kwargs.get("layout", kwargs.get("layout_sync"))
-        if isinstance(self._layout_name, (tuple, list)):
-            self._layout_name = self._layout_name[0]
+
+        self._server.state[self._dirty_layout_key] = 0
 
     def update(self, new_layout):
         if self._layout_name:
+            # Do not mark self._layout_name dirty here or it will break the client
             update_layout(self._server.state[self._layout_name], new_layout)
+            # Trigger an update for the div
+            self._server.state[self._dirty_layout_key] += 1
 
 
 class GridItem(HtmlElement):
