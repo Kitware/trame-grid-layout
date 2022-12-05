@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.1 (2022-12-05)
+### Fix
+* **update:** Re-evaluate siblings on update ([`a79889c`](https://github.com/Kitware/trame-grid-layout/commit/a79889c6a971f30fbabbd9a074b9b8ed2c4d8cec))
+
 ## v1.0.0 (2022-09-13)
 ### Feature
 * **layout:** Add update method on GridLayout ([`cda67a6`](https://github.com/Kitware/trame-grid-layout/commit/cda67a621e6ef9f37ce2c6e06a34594085772536))
