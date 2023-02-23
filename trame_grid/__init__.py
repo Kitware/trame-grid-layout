@@ -1,3 +1,7 @@
+from trame_client.utils.version import get_version
+
+__version__ = get_version("trame-grid-layout")
+
 ITEM_KEYS = [
     "x",
     "y",
