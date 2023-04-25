@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.3 (2023-04-25)
+### Fix
+* **api:** Expose only meaningful classes ([`0085faa`](https://github.com/Kitware/trame-grid-layout/commit/0085faae5e44a89216c73d902612fb7918a46064))
+
 ## v1.0.2 (2023-02-23)
 ### Fix
 * **version:** Add __version__ ([`6a33f8a`](https://github.com/Kitware/trame-grid-layout/commit/6a33f8a3306697a5efa32aa68150c67ec2759602))
