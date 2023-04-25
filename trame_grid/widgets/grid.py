@@ -1,6 +1,13 @@
+"""Grid Widgets only support vue2.
+"""
 from trame_client.widgets.core import AbstractElement
 from trame_client.widgets.html import Div
 from .. import module, update_layout
+
+__all__ = [
+    "GridLayout",
+    "GridItem",
+]
 
 
 class HtmlElement(AbstractElement):
