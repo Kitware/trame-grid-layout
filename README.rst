@@ -1,5 +1,7 @@
-Grid Layout widgets for trame
-==================================
+.. |pypi_download| image:: https://img.shields.io/pypi/dm/trame-grid-layout
+
+Grid Layout widgets for trame |pypi_download|
+====================================================================
 
 trame-grid-layout extend trame **widgets** with components that can be used to create some dynamic grid layout containers.
 It leverage [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout) which is a grid layout system, like 
