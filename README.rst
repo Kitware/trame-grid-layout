@@ -111,3 +111,9 @@ Simple example
 
     if __name__ == "__main__":
         server.start()
+
+
+JavaScript dependency
+-----------------------------------------------------------
+
+This Python package bundle the ``vue-grid-layout@2.4.0`` JavaScript library. If you would like us to upgrade it, `please reach out <https://www.kitware.com/trame/>`_.
