@@ -4,8 +4,8 @@ Grid Layout widgets for trame |pypi_download|
 ====================================================================
 
 trame-grid-layout extend trame **widgets** with components that can be used to create some dynamic grid layout containers.
-It leverage [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout) which is a grid layout system, like 
-[Gridster](http://dsmorse.github.io/gridster.js/), for Vue.js. Heavily inspired by [React-Grid-Layout](https://github.com/react-grid-layout/react-grid-layout).
+It leverage `vue-grid-layout <https://github.com/jbaysolutions/vue-grid-layout>`_ which is a grid layout system, like 
+`Gridster <http://dsmorse.github.io/gridster.js>`_, for Vue.js. Heavily inspired by `React-Grid-Layout <https://github.com/react-grid-layout/react-grid-layout>`_.
 
 
 Installing
@@ -21,7 +21,7 @@ trame-grid-layout can be installed with `pip <https://pypi.org/project/trame-gri
 Usage
 -----------------------------------------------------------
 
-The `Trame Tutorial <https://kitware.github.io/trame/docs/tutorial.html>`_ is the place to go to learn how to use the library and start building your own application.
+The `Trame Tutorial <https://kitware.github.io/trame/guide/tutorial>`_ is the place to go to learn how to use the library and start building your own application.
 
 The `API Reference <https://trame.readthedocs.io/en/latest/index.html>`_ documentation provides API-level documentation.
 
@@ -36,7 +36,7 @@ This license has been chosen to match the one use by `vue-grid-layout <https://g
 Community
 -----------------------------------------------------------
 
-`Trame <https://kitware.github.io/trame/>`_ | `Discussions <https://github.com/Kitware/trame/discussions>`_ | `Issues <https://github.com/Kitware/trame/issues>`_ | `RoadMap <https://github.com/Kitware/trame/projects/1>`_ | `Contact Us <https://www.kitware.com/contact-us/>`_
+`Trame <https://kitware.github.io/trame/>`_ | `Discussions <https://github.com/Kitware/trame/discussions>`_ | `Issues <https://github.com/Kitware/trame/issues>`_ | `Contact Us <https://www.kitware.com/contact-us/>`_
 
 .. image:: https://zenodo.org/badge/410108340.svg
     :target: https://zenodo.org/badge/latestdoi/410108340
